@@ -1,20 +1,8 @@
-import { useState } from 'react';
+import { useState , u } from 'react';
 import TodoItem from './TodoItem';
 
 export default function TodoList() {
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            text: 'Doctor Appointment',
-            completed: true
-        },
-        {
-            id: 2,
-            text: 'Meeting at School',
-            completed: false
-        }
-    ]);
-
+    const [tasks, setTasks] = useState([]);
     const [text, setText] = useState('');
 
     function addTask(text) {
@@ -23,7 +11,7 @@ export default function TodoList() {
             text,
             completed: false
         };
-        setTasks([...tasks, newTask]); // Corrected spread syntax here
+        setTasks([...tasks, newTask]); 
         setText('');
     }
 
@@ -40,22 +28,31 @@ export default function TodoList() {
             }
         }));
     }
-
+    const [count , setCount] = useState(0)
+    
+        <div>{count}</div>
     return (
         <div className="todo-list">
-            {tasks.map(task => (
-                <TodoItem
-                    key={task.id}
-                    task={task}
-                    deleteTask={deleteTask}
-                    toggleCompleted={toggleCompleted}
+            <h1>Todo List</h1>
+            <div className="todo-input">
+                <input
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    placeholder="Add a new task..."
                 />
-            ))}
-            <input
-                value={text}
-                onChange={e => setText(e.target.value)}
-            />
-            <button onClick={() => addTask(text)}>Add</button>
+                <button onClick={() => addTask(text)}>Add</button>
+            </div>
+            <ul className="tasks">
+                {tasks.map(task => (
+                    <TodoItem
+                        key={task.id}
+                        task={task}
+                        deleteTask={deleteTask}
+                        toggleCompleted={toggleCompleted}
+                    />
+                ))}
+            </ul>
+
         </div>
     );
 }

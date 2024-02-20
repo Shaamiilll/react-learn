@@ -6,12 +6,11 @@ export default function ApiData() {
   const [count, setCount] = useState(1); 
 
   useEffect(() => {
-    // Fetch data from the API
     fetch(`https://jsonplaceholder.typicode.com/users/${count}`)
       .then(response => response.json())
       .then(data => setUserData(data))
       .catch(error => console.error('Error fetching data:', error));
-  }, [count]); // Include count in the dependency array
+  }, [count]); 
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

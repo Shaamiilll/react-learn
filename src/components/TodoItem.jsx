@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';  
 
 function TodoItem({ task, deleteTask, toggleCompleted }) {
     function handleChange() {
@@ -6,14 +6,20 @@ function TodoItem({ task, deleteTask, toggleCompleted }) {
     }
 
     return (
-        <div className="todo-item">
+        <div className="flex items-center mb-2">
             <input
-                type="checkbox" // Corrected input type
+                type="checkbox"
+                className="mr-2"
                 checked={task.completed}
                 onChange={handleChange}
             />
-            <p>{task.text}</p>
-            <button onClick={() => deleteTask(task.id)}>
+            <p className={`flex-1 ${task.completed ? 'line-through text-gray-500' : 'text-white'}`}>
+                {task.text}
+            </p>
+            <button
+                className="bg-red-500 text-white rounded px-2 py-1"
+                onClick={() => deleteTask(task.id)}
+            >
                 X
             </button>
         </div>
